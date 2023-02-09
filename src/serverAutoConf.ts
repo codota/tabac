@@ -1,6 +1,7 @@
 import { testAsync, test } from "./test";
 import assertCommandOutput from "./assertCommandOutput";
 import assertMemoryGb from "./assertMemorySize";
+import assertHttpGetOk from "./assertHttpGetOk";
 
 export default async function serverAutoConf() {
   await testAsync("Cuda version", async () => {
@@ -24,5 +25,9 @@ export default async function serverAutoConf() {
 
   test("Memory size", () => {
     assertMemoryGb(8);
+  });
+
+  await testAsync("Access to Tabnine logs gateway", async () => {
+    await assertHttpGetOk("https://logs-gateway.tabnine.com");
   });
 }
