@@ -9,7 +9,7 @@ program
   .description("Tabnine auto configuration script")
   .option("--client", "auto configuration script for clients")
   .option("--server", "auto configuration script for server")
-  .option('-u, --url <url>', 'inference service parameter (required for client run)')
+  .option('--url <url>', 'inference service parameter (required for client run)')
   .parse(process.argv);
 
 // program.parse(process.argv);
