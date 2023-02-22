@@ -9,10 +9,10 @@ program
   .description("Tabnine auto configuration script")
   .option("--client", "auto configuration script for clients")
   .option("--server", "auto configuration script for server")
+  .option("--port <port>", "server port")
   .option('--url <url>', 'inference service parameter (required for client run)')
   .parse(process.argv);
 
-// program.parse(process.argv);
 const opts = program.opts();
 if (!opts.client && !opts.server) {
   program.help();
@@ -33,5 +33,5 @@ if (opts.client) {
 }
 
 if (opts.server) {
-  serverAutoConf();
+  serverAutoConf({serverPort:opts.port});
 }
