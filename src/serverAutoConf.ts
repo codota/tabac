@@ -2,8 +2,9 @@ import { testAsync, test } from "./test";
 import assertCommandOutput from "./assertCommandOutput";
 import assertMemoryGb from "./assertMemorySize";
 import assertHttpGetOk from "./assertHttpGetOk";
+import {startMockServer} from "./test-server/MockServer";
 
-export default async function serverAutoConf() {
+export default async function serverAutoConf(params: {serverPort: number}) {
   await testAsync("Cuda version", async () => {
     await assertCommandOutput(
       "nvcc --version",
@@ -30,4 +31,6 @@ export default async function serverAutoConf() {
   await testAsync("Access to Tabnine logs gateway", async () => {
     await assertHttpGetOk("https://logs-gateway.tabnine.com");
   });
+
+  startMockServer(params);
 }
