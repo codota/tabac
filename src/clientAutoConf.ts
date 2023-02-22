@@ -13,16 +13,17 @@ export default async function clientAutoConf(inferenceUrl: string) {
     await assertHttpGetOk("https://notify.tabnine.com/health");
   });
 
+  await testAsync("Connection to Tabnine inference root", async () => {
+    await assertHttpGetOk(`${inferenceUrl}`);
+  });
+
   await testAsync("Connection to Tabnine inference service", async () => {
     await assertHttpGetOk(`${inferenceUrl}/health`);
   });
-  await testAsync("attempting inference request", async () => {
-    await assertHttpPostOk(`${inferenceUrl}/infer`);
+
+  await testAsync("Attempting inference request", async () => {
+    await assertHttpPostOk(`${inferenceUrl}/infer`, 403);
   });
-
-
-
-
 
   test("Memory size", () => {
     assertMemoryGb(8);
