@@ -1,5 +1,6 @@
 import { Command } from "commander";
 import clientAutoConf from "./clientAutoConf";
+import serverAutoConf from "./serverAutoConf";
 
 const version = '1.0.0';
 
@@ -36,6 +37,5 @@ if (opts.client) {
 }
 
 if (opts.server) {
-  console.log('server tests are not provided with this version. ')
-  // serverAutoConf({serverPort:opts.port});
+  serverAutoConf({serverPort:opts.port});
 }
