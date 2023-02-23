@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export default async function assertPostOk(url: string) {
+export default async function assertPostOk(url: string, statusCode: number = 200) {
   const { status } = await axios.post(url, { timeout: 5000 });
-  if (status != 200) {
-    throw new Error(`Expected response 200, got ${status}`);
+  if (status != statusCode) {
+    throw new Error(`Expected response ${statusCode}, got ${status}`);
   }
 }
