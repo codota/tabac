@@ -16,7 +16,7 @@ Options:
   -h, --help  display help for command
 
 ```
-### Usin docker
+### Using docker
 - Create a github PAT with with `read:user` and `read:packages` permissions
 - Login to `ghcr.io` using your github username and the newly created PAT
 ```bash
