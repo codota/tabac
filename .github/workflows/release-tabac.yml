@@ -25,7 +25,7 @@ jobs:
       run: yarn build
 
     - name: package
-      run: yarn pkg
+      run: yarn pkg .
 
 
     - name: Create Release
