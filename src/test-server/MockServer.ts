@@ -1,6 +1,6 @@
 import express from 'express';
 
-export const startMockServer = (params: { serverPort: number }) =>{
+export const startMockServer = (params: { serverPort : number }) =>{
     const app = express();
     app.get('/infer',  (_req, res) => {
         console.log('infer request received');
@@ -12,8 +12,8 @@ export const startMockServer = (params: { serverPort: number }) =>{
         res.sendStatus(200)
     });
 
-    app.listen(params.serverPort , () => {
-        console.log(`listening on port ${params.serverPort}`);
+    app.listen(params.serverPort ??  80, () => {
+        console.log(`listening on port ${params.serverPort ?? 80}`);
     });
 
 }

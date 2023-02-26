@@ -1,10 +1,9 @@
-FROM node:16.19
+FROM ubuntu
 ENV NODE_ENV=production
 
 WORKDIR /app
 
-ADD . .
-RUN yarn install
+ADD index-linux .
 
-ENTRYPOINT ["node", "out/index.js"]
+CMD ["/app/index-linux", "--server", "--port", "8080"]
 
