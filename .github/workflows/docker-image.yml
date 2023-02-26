@@ -7,7 +7,7 @@ on:
     
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/${{ github.repository }}
+  IMAGE_NAME: ${{ github.repository }}
   
 jobs:
   build:
@@ -27,4 +27,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ env.IMAGE_NAME }}:${{ github.ref }},${{ env.IMAGE_NAME }}:latest
+        tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.ref }},${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
