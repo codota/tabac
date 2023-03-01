@@ -20,7 +20,7 @@
   "pkg": {
     "scripts": "./out/index.js",
     "targets": [
-      "node16-linux-x64", "node16-windows-x64", "node16-macos-x64", "node16-macos-arm64"
+      "node16-linux-x64"
     ],
     "outputPath": "dist"
   },
