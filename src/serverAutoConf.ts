@@ -2,17 +2,17 @@ import { testAsync, test } from "./test";
 import assertCommandOutput from "./assertCommandOutput";
 import assertMemoryGb from "./assertMemorySize";
 import assertHttpGetOk from "./assertHttpGetOk";
-import {startMockServer} from "./test-server/MockServer";
 
-export default async function serverAutoConf(params: {serverPort: number}) {
-  await testAsync("Cuda version", async () => {
+export default async function serverAutoConf() {
+  const results: {test: string, result: string, details?: string}[]= [];
+  results.push(await testAsync("Cuda version", async () => {
     await assertCommandOutput(
       "nvcc --version",
       "Cuda compilation tools, release 11.7, V11.7.99"
     );
-  });
+  }));
 
-  await testAsync("Access to gcs buckets", async () => {
+  results.push(await testAsync("Access to gcs buckets", async () => {
     await assertCommandOutput("gcloud --version", "Google Cloud SDK");
     await assertCommandOutput(
       "gsutil ls gs://artifacts.tabnine-self-hosted.appspot.com/",
@@ -22,15 +22,19 @@ export default async function serverAutoConf(params: {serverPort: number}) {
       "gsutil ls gs://tabnine-self-hosted-models",
       "12langs"
     );
-  });
+  }));
 
-  test("Memory size", () => {
+  results.push(test("Memory size", () => {
     assertMemoryGb(8);
-  });
+  }));
 
-  await testAsync("Access to Tabnine logs gateway", async () => {
+  results.push(await testAsync("Access to Tabnine logs gateway", async () => {
     await assertHttpGetOk("https://logs-gateway.tabnine.com");
-  });
+  }));
 
-  startMockServer(params);
+  results.push(await testAsync("Access to Tabnine analytics gateway", async () => {
+    await assertHttpGetOk("https://notify.tabnine.com/health");
+  }));
+  return results;
+
 }
