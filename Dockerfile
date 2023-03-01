@@ -1,9 +1,9 @@
-FROM ubuntu
+FROM --platform=linux/amd64 ubuntu
 ENV NODE_ENV=production
 
 WORKDIR /app
 
-ADD index-linux .
+ADD dist/tabac-linux-x64 .
 
-CMD ["/app/index-linux", "--server", "--port", "8080"]
+CMD ["/app/tabac-linux-x64", "--port", "8080"]
 
